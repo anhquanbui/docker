@@ -50,5 +50,16 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 sudo systemctl enable --now docker
 sudo docker run --rm hello-world
 ```
+## RE-CHECK
+```
+systemctl status docker
+sudo docker --version
+docker run hello-world
 
+```
+## ENABLE (IF INACTIVE)
+```
+sudo systemctl start docker
+sudo systemctl enable docker
+```
 
