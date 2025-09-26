@@ -1,8 +1,54 @@
-# test docker
+# DOCKER PART
 test docker for the project, VPS: Ubuntu system
 
---------
-install: sudo apt update && sudo apt upgrade -y
+## SYSTEM CHECK
+``` cat /etc/os-release ```
 
-<img width="1010" height="285" alt="image" src="https://github.com/user-attachments/assets/29e765df-7815-4f40-9d94-d3117448bf91" />
+## INSTALL
+### UBUNTU
+
+```
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+
+# Add GPG key & repo
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+  | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+https://download.docker.com/linux/ubuntu \
+$(. /etc/os-release && echo $VERSION_CODENAME) stable" \
+| sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Install Docker
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Turn on service & test
+sudo systemctl enable --now docker
+sudo docker run --rm hello-world
+```
+
+### DEBIAN
+
+```
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg \
+  | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+https://download.docker.com/linux/debian \
+$(. /etc/os-release && echo $VERSION_CODENAME) stable" \
+| sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo systemctl enable --now docker
+sudo docker run --rm hello-world
+```
+
 
