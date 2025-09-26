@@ -55,7 +55,6 @@ sudo docker run --rm hello-world
 systemctl status docker
 sudo docker --version
 docker run hello-world
-
 ```
 ## ENABLE (IF INACTIVE)
 ```
