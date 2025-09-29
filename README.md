@@ -5,7 +5,7 @@ This guide helps you **install Docker on VPS (Ubuntu/Debian)** and provides a **
 ---
 
 ## 🔧 System Check
-```bash
+```
 cat /etc/os-release
 ```
 
@@ -14,7 +14,7 @@ cat /etc/os-release
 ## 📥 Install Docker
 
 ### Ubuntu
-```bash
+```
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg
 
@@ -37,7 +37,7 @@ sudo docker run --rm hello-world
 ---
 
 ### Debian
-```bash
+```
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg
 
@@ -57,7 +57,7 @@ sudo docker run --rm hello-world
 ---
 
 ## ✅ Re-check Installation
-```bash
+```b
 systemctl status docker
 sudo docker --version
 docker run hello-world
@@ -66,7 +66,7 @@ docker run hello-world
 ---
 
 ## ⚡ Enable Docker (if inactive)
-```bash
+```
 sudo systemctl start docker
 sudo systemctl enable docker
 ```
@@ -76,7 +76,7 @@ sudo systemctl enable docker
 # 📚 Docker Command Cheat Sheet
 
 👉 If you’re just starting out, remember these **Top 5 Commands**:
-```bash
+```
 docker ps -a
 docker run ...
 docker stop ...
@@ -87,7 +87,7 @@ docker exec -it ... bash
 ---
 
 ## 1. Basic Container Operations
-```bash
+```
 docker ps                       # List running containers
 docker ps -a                    # List all containers (including stopped ones)
 docker run -it <image> <cmd>    # Run container (foreground)
@@ -100,7 +100,7 @@ docker run -v $(pwd):/app <image>     # Mount host folder
 ---
 
 ## 2. Managing Containers
-```bash
+```
 docker stop <id|name>           # Stop a container
 docker start <id|name>          # Start a stopped container
 docker restart <id|name>        # Restart container
@@ -111,7 +111,7 @@ docker container prune          # Remove all stopped containers
 ---
 
 ## 3. Managing Images
-```bash
+```
 docker images                   # List local images
 docker pull <image>:<tag>       # Pull image from Docker Hub
 docker rmi <id|name>            # Remove image
@@ -121,7 +121,7 @@ docker image prune -a           # Remove unused images
 ---
 
 ## 4. Inspecting & Accessing Containers
-```bash
+```
 docker exec -it <id|name> bash  # Open shell inside container
 docker logs <id|name>           # Show logs
 docker logs -f <id|name>        # Follow logs in real time
@@ -130,7 +130,7 @@ docker logs -f <id|name>        # Follow logs in real time
 ---
 
 ## 5. Building Images
-```bash
+```
 docker build -t myapp:latest .
 docker build -t myapp:latest --build-arg ENV=prod .
 ```
@@ -138,7 +138,7 @@ docker build -t myapp:latest --build-arg ENV=prod .
 ---
 
 ## 6. System Management
-```bash
+```
 docker info                     # Show system info
 docker system prune -a          # Clean up unused data
 docker system df                # Show disk usage
@@ -147,7 +147,7 @@ docker system df                # Show disk usage
 ---
 
 ## 7. Networks & Volumes
-```bash
+```
 docker network ls               # List networks
 docker network create mynet     # Create network
 docker run -d --network=mynet --name=web nginx   # Run container in network
@@ -158,7 +158,7 @@ docker volume prune             # Remove unused volumes
 ---
 
 ## 8. Bonus: Docker Compose
-```bash
+```
 docker compose up -d            # Start services
 docker compose down             # Stop & remove services
 docker compose up -d --build    # Rebuild & restart services
