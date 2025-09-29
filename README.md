@@ -166,4 +166,75 @@ docker compose up -d --build    # Rebuild & restart services
 
 ---
 
-✨ With this guide, you can quickly set up Docker on your VPS and manage containers like a pro!
+## 🧹 Cleanup Scripts (you can downoa
+
+Sometimes you want to remove containers and images (to refresh environment) or completely reset Docker.  
+Below are two ready-to-use scripts (already uploaded to Git).
+
+### 1. Light Cleanup (Safe)
+Removes **containers + images** only. Keeps **volumes and databases** safe.
+
+```bash
+#!/bin/bash
+# ✅ SAFE MODE: This script removes containers and images only.
+# Volumes and databases are kept safe, no data will be lost.
+
+echo "🛑 Stopping all containers..."
+docker stop $(docker ps -aq) 2>/dev/null
+
+echo "🗑️  Removing all containers..."
+docker rm -f $(docker ps -aq) 2>/dev/null
+
+echo "🗑️  Removing all images..."
+docker rmi -f $(docker images -aq) 2>/dev/null
+
+echo "✅ All containers and images removed. Volumes and data are preserved."
+```
+
+Save as `cleanup-docker-light.sh` and run:
+```bash
+chmod +x cleanup-docker-light.sh
+./cleanup-docker-light.sh
+```
+
+---
+
+### 2. Full Cleanup (Dangerous)
+Removes **everything**: containers, images, volumes, and networks.  
+⚠️ **All data (including databases) will be deleted**.
+
+```bash
+#!/bin/bash
+# 🚨 WARNING: This script will remove ALL Docker data including volumes (databases).
+# Use only if you want to completely reset Docker to a clean state.
+
+echo "🛑 Stopping all containers..."
+docker stop $(docker ps -aq) 2>/dev/null
+
+echo "🗑️  Removing all containers..."
+docker rm -f $(docker ps -aq) 2>/dev/null
+
+echo "🗑️  Removing all images..."
+docker rmi -f $(docker images -aq) 2>/dev/null
+
+echo "🗑️  Removing all volumes..."
+docker volume rm $(docker volume ls -q) 2>/dev/null
+
+echo "🗑️  Removing all non-default networks..."
+docker network rm $(docker network ls -q) 2>/dev/null
+
+echo "🧹 Pruning system (containers, images, networks, volumes)..."
+docker system prune -a -f --volumes
+
+echo "✅ Docker has been completely cleaned."
+```
+
+Save as `cleanup-docker-full.sh` and run:
+```bash
+chmod +x cleanup-docker-full.sh
+./cleanup-docker-full.sh
+```
+
+---
+
+✨ With this guide, you can quickly set up Docker on your VPS, manage containers like a pro, and clean up safely when needed.
